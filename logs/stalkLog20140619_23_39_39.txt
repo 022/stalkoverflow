@@ -4,7 +4,7 @@
 [20140619 23:39:47][WARNING] Could not find pyasn1 and pyasn1_modules. SSL certificate COULD NOT BE VERIFIED.
 [20140619 23:39:47][INFO] SASL: X-OAUTH2: Missing credential: access_token
 [20140619 23:39:47][INFO] SASL: X-GOOGLE-TOKEN: Missing credential: access_token
-[20140619 23:39:48][INFO] JID set to: notifybot7160@gmail.com/C3CA71C2
+[20140619 23:39:48][INFO] JID set to: unknownemailid@unknowndomain.com/C3CA71C2
 [20140619 23:39:48][WARNING] Could not find pyasn1 and pyasn1_modules. SSL certificate expiration COULD NOT BE VERIFIED.
 [20140619 23:39:49][INFO] Waiting for </stream:stream> from server
 [20140619 23:39:49][ERROR] Error reading from XML stream.
@@ -19,7 +19,7 @@
 [20140619 23:40:00][WARNING] Could not find pyasn1 and pyasn1_modules. SSL certificate COULD NOT BE VERIFIED.
 [20140619 23:40:00][INFO] SASL: X-OAUTH2: Missing credential: access_token
 [20140619 23:40:00][INFO] SASL: X-GOOGLE-TOKEN: Missing credential: access_token
-[20140619 23:40:00][INFO] JID set to: notifybot7160@gmail.com/9686FDBD
+[20140619 23:40:00][INFO] JID set to: unknownemailid@unknowndomain.com/9686FDBD
 [20140619 23:40:01][WARNING] Could not find pyasn1 and pyasn1_modules. SSL certificate expiration COULD NOT BE VERIFIED.
 [20140619 23:40:01][INFO] Waiting for </stream:stream> from server
 [20140619 23:40:02][ERROR] Error reading from XML stream.
@@ -29,7 +29,7 @@
 [20140619 23:40:12][WARNING] Could not find pyasn1 and pyasn1_modules. SSL certificate COULD NOT BE VERIFIED.
 [20140619 23:40:12][INFO] SASL: X-OAUTH2: Missing credential: access_token
 [20140619 23:40:12][INFO] SASL: X-GOOGLE-TOKEN: Missing credential: access_token
-[20140619 23:40:12][INFO] JID set to: notifybot7160@gmail.com/05AB9AD0
+[20140619 23:40:12][INFO] JID set to: unknownemailid@unknowndomain.com/05AB9AD0
 [20140619 23:40:12][WARNING] Could not find pyasn1 and pyasn1_modules. SSL certificate expiration COULD NOT BE VERIFIED.
 [20140619 23:40:13][INFO] Waiting for </stream:stream> from server
 [20140619 23:40:13][ERROR] Error reading from XML stream.
