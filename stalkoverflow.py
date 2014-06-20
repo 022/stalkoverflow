@@ -15,7 +15,7 @@ from datetime import datetime
 def authenticate():
     temp_file = "stalkoverflow.pkl"
     temp_file_path =  os.path.join(tempfile.gettempdir(), temp_file)
-    if os.path.exists("/tmp/stalkoverflow.pkl"):
+    if os.path.exists(temp_file_path):
         authority = pickle.load(open(temp_file_path))
     else:
         print "Requesting info for initial setup:"
