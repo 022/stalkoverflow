@@ -73,8 +73,9 @@ def parseFeed(rss_url):
     new_link=feed["entries"][0]["link"]
     return new_title, new_link
 
-def stalk(tag, authority):
-    rss_url="http://stackoverflow.com/feeds/tag?tagnames="+tag+"&sort=newest"
+def stalk(tags, authority):
+    tagnames = tags.replace(' ','').replace(',','+or+')
+    rss_url="http://stackoverflow.com/feeds/tag?tagnames="+tagnames+"&sort=newest"
     logging.info("rss url = {0}".format(rss_url))
     new_title, new_link = parseFeed(rss_url)
     old_title=""
@@ -96,11 +97,11 @@ def main():
     authority = authenticate(opts.reauth)
     if opts.logs_on:
         setup_logging()
-    tag = raw_input("Enter a tag to stalk on: ")
-    send_chat("Started stalking {0} on StalkOverflow B) ".format(tag), authority)
-    logging.info("Tag = ".format(tag))
-    logging.info("Started stalking {0} on StalkOverflow".format(tag))
-    stalk(tag, authority)
+    tags = raw_input("Enter tags to stalk on: ")
+    send_chat("Started stalking {0} on StalkOverflow ) ".format(tags), authority)
+    logging.info("Tags = ".format(tags))
+    logging.info("Started stalking {0} on StalkOverflow".format(tags))
+    stalk(tags, authority)
     
 if __name__ == "__main__":
     main()
