@@ -31,11 +31,12 @@ Make sure you install all requirements
 
 `sudo pip2 install -r requirements.txt`
 
-Setup your chat preferences in `secret.py` . The script uses xmpp protocol which supports most of the chat services like jabber and gtalk
+The application uses xmpp protocol which supports most of the chat services like jabber and gtalk
 
 Run the service using
 
 `python2 stalkoverflow.py`
 
+Should prompt you for user id's and passwords for authentication. This works only once. Later asks you to pick a tag to stalk on.
 
 [StackOverflow]:http://stackoverflow.com/
