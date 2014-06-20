@@ -42,19 +42,20 @@ def signal_handling(signum, frame):
     send_chat("Bye!")
     sys.exit()
     
+def parseFeed(rss_url):
+    feed=feedparser.parse(rss_url)
+    new_title=feed["entries"][0]["title"]
+    new_link=feed["entries"][0]["link"]  
+
 def stalk(tag):
     rss_url="http://stackoverflow.com/feeds/tag?tagnames="+tag+"&sort=newest"
     logging.info("rss url = {0}".format(rss_url))
-    feed=feedparser.parse(rss_url)
-    new_title=feed["entries"][0]["title"]
-    new_link=feed["entries"][0]["link"]
+    parseFeed(rss_url)
     old_title=""
 
     while True:
         if new_title == old_title:
-            feed = feedparser.parse(rss_url)
-            new_title = feed["entries"][0]["title"]
-            new_link = feed["entries"][0]["link"]
+            parseFeed(rss_url)
         else:
             old_title = new_title
             logging.info(new_title)
