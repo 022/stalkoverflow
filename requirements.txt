@@ -1,3 +1,5 @@
 dnspython
 sleekxmpp
 feedparser
+pyasn1
+pyasn1_modules

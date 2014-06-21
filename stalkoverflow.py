@@ -98,7 +98,7 @@ def main():
     if opts.logs_on:
         setup_logging()
     tags = raw_input("Enter tags to stalk on: ")
-    send_chat("Started stalking {0} on StalkOverflow ) ".format(tags), authority)
+    send_chat("Started stalking {0} on StalkOverflow B-) ".format(tags), authority)
     logging.info("Tags = ".format(tags))
     logging.info("Started stalking {0} on StalkOverflow".format(tags))
     stalk(tags, authority)
