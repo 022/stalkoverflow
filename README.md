@@ -40,6 +40,7 @@ Run the service using
 Should prompt you for user id's and passwords for authentication. This works only once. Later asks you to pick tags to stalk on.
 
 Looks like this:
-[[http://s30.postimg.org/60l0swy5t/terminal_scrot.png]]
-[[http://s4.postimg.org/i0nghcn3x/chat_preview.png]]
+![](http://s30.postimg.org/60l0swy5t/terminal_scrot.png)
+
+![](http://s4.postimg.org/i0nghcn3x/chat_preview.png)
 [StackOverflow]:http://stackoverflow.com/
