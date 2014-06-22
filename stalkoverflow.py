@@ -89,7 +89,7 @@ def stalk(tags, authority):
             logging.info(new_link)
             send_chat(new_title+"""
             """+new_link, authority)
-        time.sleep(1)
+        time.sleep(10)
         
 def main():
     signal.signal(signal.SIGINT, signal_handling)
