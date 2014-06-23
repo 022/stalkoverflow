@@ -71,6 +71,7 @@ def parseFeed(rss_url):
     feed=feedparser.parse(rss_url)
     new_title=feed["entries"][0]["title"]
     new_link=feed["entries"][0]["link"]
+    new_link = new_link[:new_link.rfind("/")]
     return new_title, new_link
 
 def stalk(tags, authority):
