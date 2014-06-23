@@ -37,7 +37,7 @@ Run the service using
 
 `python2 stalkoverflow.py`
 
-Should prompt you for user id's and passwords for authentication. This works only once. Later asks you to pick tags to stalk on.
+Should prompt you for user id's and passwords for authentication. This information is stored untill your system is switched off. Later asks you to pick tags to stalk on.
 
 Looks like this:
 
