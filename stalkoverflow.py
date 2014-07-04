@@ -74,7 +74,6 @@ def parseFeed(rss_url):
     soup = BeautifulSoup(page)
 
     for el in soup.findAll("div", {"class":"question-summary"}, limit=1):
-        print "inside for"
         new_title = el.find("h3").text
         new_link = "http://stackoverflow.com" + el.find("h3").find("a").get("href")
         new_link = new_link[:new_link.rfind("/")]
