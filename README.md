@@ -5,11 +5,11 @@ Get chat notifications for new questions posted on [StackOverflow] for the given
 
 ***Why?***
 
-It's such a pain in the *** to continously click on the "n questions with new activity" button and refreshing the StackOverflow page to get updated with information. There doesn't seem to exist any other way of getting notified on what question was recently posted on StackOverflow related to my favourite tags.
+It's such a pain to continuously click on the "n questions with new activity" button and refreshing the StackOverflow page to get updated with information. There doesn't seem to exist any other way of getting notified on what question was recently posted on StackOverflow related to my favorite tags.
 
-It's crucial to get info on latest questions posted ASAP inorder to get a better StackOverflow rating. Thus, I've decided to write a stalking application which would keep an eye on StackOverflow's activity for my favourite tags.
+It's crucial to get info on latest questions posted ASAP in order to get a better StackOverflow rating. Thus, I've decided to write a stalking application which would keep an eye on StackOverflow's activity for my favorite tags.
 
-The best part is sice XMPP protocol is being used, users could get notified across all their devices which support chatting!
+The best part is since XMPP protocol is being used, users could get notified across all their devices which support chatting!
 
 
 **Requirements:**
@@ -31,13 +31,13 @@ Make sure you install all requirements
 
 `sudo pip2 install -r requirements.txt`
 
-The application uses XMPP protocol which supports most of the chat services like jabber and gtalk
+The application uses XMPP protocol which supports most of the chat services like jabber and google-hangouts
 
 Run the service using
 
 `python2 stalkoverflow.py`
 
-Should prompt you for user id's and passwords for authentication. This information is stored untill your system is switched off. Later asks you to pick tags to stalk on.
+Should prompt you for user id's and passwords for authentication. This information is stored until your system is switched off. Later asks you to pick tags to stalk on.
 
 Looks like this:
 
