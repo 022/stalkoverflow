@@ -1,5 +1,5 @@
 dnspython
 sleekxmpp
-feedparser
+beautifulsoup
 pyasn1
 pyasn1_modules

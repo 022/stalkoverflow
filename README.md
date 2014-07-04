@@ -16,7 +16,7 @@ The best part is sice XMPP protocol is being used, users could get notified acro
 
 * dnspython
 * sleekxmpp
-* feedparser
+* beautifulsoup
 
 All the above mentioned packages are available in pip.
 
