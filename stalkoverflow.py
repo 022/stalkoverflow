@@ -1,7 +1,7 @@
+#!/bin/python2
 import time
 import os
 import sys
-import logging
 import getpass
 import sleekxmpp
 import signal
@@ -39,19 +39,13 @@ def send_chat(message, authority):
     else:
         print("Unable to connect.")
 
-def setup_logging():
-    if not os.path.exists('logs'):
-        os.mkdir('logs')
-    logging.basicConfig(filename='logs/stalkLog{0}.txt'.format(datetime.now().strftime('%Y%m%d_%H_%M_%S')), format="[%(asctime)s][%(levelname)s] %(message)s", datefmt="%Y%m%d %H:%M:%S", level=logging.INFO)
 
 def signal_handling(signum, frame):
-    logging.info("Exiting")
     sys.exit()
     
 def get_option_parser():
     options = OptionParser(description=__doc__)
     options.add_option('--auth', action="store_true", dest='reauth', default=False, help="Re run authenticative process")
-    options.add_option('--logs', action="store_true", dest='logs_on', default=False, help="Log output to disk")
     return options.parse_args()
                     
 def authenticate(reauth):
@@ -69,7 +63,6 @@ def authenticate(reauth):
     return authority
 
 def parseFeed(rss_url):
-    print "ping "+datetime.now().strftime("%H:%M:%S")
     page = urllib2.urlopen(rss_url)
     soup = BeautifulSoup(page)
 
@@ -83,7 +76,6 @@ def parseFeed(rss_url):
 def stalk(tags, authority):
     tagnames = tags.replace(' ','').replace(',','+or+')
     rss_url="http://stackoverflow.com/questions/tagged/"+tagnames+"?sort=newest&pageSize=10"
-    logging.info("rss url = {0}".format(rss_url))
     new_title, new_link = parseFeed(rss_url)
     old_title=""
 
@@ -92,8 +84,6 @@ def stalk(tags, authority):
             new_title, new_link = parseFeed(rss_url)
         else:
             old_title = new_title
-            logging.info(new_title)
-            logging.info(new_link)
             send_chat(new_title+"""
             """+new_link, authority)
         time.sleep(10)
@@ -102,12 +92,8 @@ def main():
     signal.signal(signal.SIGINT, signal_handling)
     opts, args =  get_option_parser()
     authority = authenticate(opts.reauth)
-    if opts.logs_on:
-        setup_logging()
     tags = raw_input("Enter tags to stalk on: ")
     send_chat("Started stalking {0} on StalkOverflow B-) ".format(tags), authority)
-    logging.info("Tags = ".format(tags))
-    logging.info("Started stalking {0} on StalkOverflow".format(tags))
     stalk(tags, authority)
     
 if __name__ == "__main__":
