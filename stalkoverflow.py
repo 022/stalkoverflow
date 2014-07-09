@@ -47,6 +47,7 @@ def signal_handling(signum, frame):
 def get_option_parser():
     options = OptionParser(description=__doc__)
     options.add_option('--auth', action="store_true", dest='reauth', default=False, help="Re run authenticative process")
+    options.add_option('--delay', action="store_true", dest='delay', default=10, help="Time delay in seconds")
     return options.parse_args()
                     
 def authenticate(reauth):
@@ -75,7 +76,7 @@ def parseFeed(rss_url, h):
     
     return new_title, new_link, question_id
 
-def stalk(tags, authority, h):
+def stalk(tags, authority, delay, h):
     tagnames = tags.replace(' ','').replace(',','+or+')
     rss_url="http://stackoverflow.com/questions/tagged/"+tagnames+"?sort=newest&pageSize=10"
     title, link, new_question_id = parseFeed(rss_url, h)
@@ -88,7 +89,7 @@ def stalk(tags, authority, h):
             old_question_id = new_question_id
             send_chat(title+"""
             """+link, authority)
-        time.sleep(10)
+        time.sleep(delay)
         
 def main():
     signal.signal(signal.SIGINT, signal_handling)
@@ -97,7 +98,7 @@ def main():
     tags = raw_input("Enter tags to stalk on: ")
     send_chat("Started stalking {0} on StalkOverflow ".format(tags), authority)
     h = HTMLParser()
-    stalk(tags, authority, h)
+    stalk(tags, authority, opts.delay, h)
     
 if __name__ == "__main__":
     main()
