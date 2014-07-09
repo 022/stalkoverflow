@@ -13,6 +13,7 @@ import urllib2
 from optparse import OptionParser
 from datetime import datetime
 from BeautifulSoup import BeautifulSoup
+from HTMLParser import HTMLParser
 
 class SendMsgBot(sleekxmpp.ClientXMPP):
     def __init__(self, sender_id, password, recipient, message):
@@ -62,26 +63,26 @@ def authenticate(reauth):
         pickle.dump(authority, open(temp_file_path,"wb"))
     return authority
 
-def parseFeed(rss_url):
+def parseFeed(rss_url, h):
     page = urllib2.urlopen(rss_url)
     soup = BeautifulSoup(page)
 
     for el in soup.findAll("div", {"class":"question-summary"}, limit=1):
-        new_title = el.find("h3").text
+        new_title = h.unescape(el.find("h3").text)
         new_link = "http://stackoverflow.com" + el.find("h3").find("a").get("href")
         new_link = new_link[:new_link.rfind("/")]
     
     return new_title, new_link
 
-def stalk(tags, authority):
+def stalk(tags, authority, h):
     tagnames = tags.replace(' ','').replace(',','+or+')
     rss_url="http://stackoverflow.com/questions/tagged/"+tagnames+"?sort=newest&pageSize=10"
-    new_title, new_link = parseFeed(rss_url)
+    new_title, new_link = parseFeed(rss_url, h)
     old_title=""
 
     while True:
         if new_title == old_title:
-            new_title, new_link = parseFeed(rss_url)
+            new_title, new_link = parseFeed(rss_url, h)
         else:
             old_title = new_title
             send_chat(new_title+"""
@@ -94,7 +95,8 @@ def main():
     authority = authenticate(opts.reauth)
     tags = raw_input("Enter tags to stalk on: ")
     send_chat("Started stalking {0} on StalkOverflow B-) ".format(tags), authority)
-    stalk(tags, authority)
+    h = HTMLParser()
+    stalk(tags, authority, h)
     
 if __name__ == "__main__":
     main()
