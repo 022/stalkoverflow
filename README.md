@@ -48,6 +48,15 @@ And if you're using a gmail-id you can get notified on hangouts!
 
 ![](http://s4.postimg.org/i0nghcn3x/chat_preview.png)
 
+Extra argument specifications:
+```
+Usage: stalkoverflow.py [options]
+
+Options:
+  -h, --help  show this help message and exit
+    --auth      Re run authenticative process
+      --delay     Time delay in seconds
+```
 
 
 [StackOverflow]:http://stackoverflow.com/
