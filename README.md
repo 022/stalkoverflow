@@ -14,6 +14,7 @@ The best part is since XMPP protocol is being used, users could get notified acr
 
 **Requirements:**
 
+* python 2.7
 * dnspython
 * sleekxmpp
 * beautifulsoup
@@ -29,13 +30,13 @@ Clone this repo
 
 Make sure you install all requirements
 
-`sudo pip2 install -r requirements.txt`
+`sudo pip install -r requirements.txt`
 
 The application uses XMPP protocol which supports most of the chat services like jabber and google-hangouts
 
 Run the service using
 
-`python2 stalkoverflow.py`
+`python stalkoverflow.py`
 
 Should prompt you for user id's and passwords for authentication. This information is stored until your system is switched off. Later asks you to pick tags to stalk on.
 
@@ -43,7 +44,7 @@ Looks like this:
 
 ![](http://s30.postimg.org/60l0swy5t/terminal_scrot.png)
 
-And if you're using gmail id you can get notified on hangouts!
+And if you're using a gmail-id you can get notified on hangouts!
 
 ![](http://s4.postimg.org/i0nghcn3x/chat_preview.png)
 
