@@ -71,22 +71,23 @@ def parseFeed(rss_url, h):
         new_title = h.unescape(el.find("h3").text)
         new_link = "http://stackoverflow.com" + el.find("h3").find("a").get("href")
         new_link = new_link[:new_link.rfind("/")]
+        question_id = new_link.split("/")[-1]
     
-    return new_title, new_link
+    return new_title, new_link, question_id
 
 def stalk(tags, authority, h):
     tagnames = tags.replace(' ','').replace(',','+or+')
     rss_url="http://stackoverflow.com/questions/tagged/"+tagnames+"?sort=newest&pageSize=10"
-    new_title, new_link = parseFeed(rss_url, h)
-    old_title=""
+    title, link, new_question_id = parseFeed(rss_url, h)
+    old_question_id = ""
 
     while True:
-        if new_title == old_title:
-            new_title, new_link = parseFeed(rss_url, h)
+        if new_question_id == old_question_id:
+            title, link, new_question_id = parseFeed(rss_url, h)
         else:
-            old_title = new_title
-            send_chat(new_title+"""
-            """+new_link, authority)
+            old_question_id = new_question_id
+            send_chat(title+"""
+            """+link, authority)
         time.sleep(10)
         
 def main():
@@ -94,7 +95,7 @@ def main():
     opts, args =  get_option_parser()
     authority = authenticate(opts.reauth)
     tags = raw_input("Enter tags to stalk on: ")
-    send_chat("Started stalking {0} on StalkOverflow B-) ".format(tags), authority)
+    send_chat("Started stalking {0} on StalkOverflow ".format(tags), authority)
     h = HTMLParser()
     stalk(tags, authority, h)
     
