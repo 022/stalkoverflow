@@ -54,8 +54,8 @@ Usage: stalkoverflow.py [options]
 
 Options:
   -h, --help  show this help message and exit
-    --auth      Re run authenticative process
-      --delay     Time delay in seconds
+  --auth      Re run authenticative process
+  --delay     Time delay in seconds
 ```
 
 
