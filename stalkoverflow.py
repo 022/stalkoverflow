@@ -81,15 +81,18 @@ def stalk(tags, authority, delay, h):
     rss_url="http://stackoverflow.com/questions/tagged/"+tagnames+"?sort=newest&pageSize=10"
     title, link, new_question_id = parseFeed(rss_url, h)
     old_question_id = ""
+    question_buffer = []
 
     while True:
-        if new_question_id == old_question_id:
+        if new_question_id in question_buffer:
             title, link, new_question_id = parseFeed(rss_url, h)
         else:
-            old_question_id = new_question_id
+            question_buffer.append(new_question_id)
             send_chat(title+"""
             """+link, authority)
         time.sleep(delay)
+        if len(question_buffer) > 120:
+            del question_buffer[0:-20]
         
 def main():
     signal.signal(signal.SIGINT, signal_handling)
