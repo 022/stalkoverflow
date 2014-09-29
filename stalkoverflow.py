@@ -9,6 +9,7 @@ import pickle
 import tempfile
 import getpass
 import urllib2
+import twitter
 
 from optparse import OptionParser
 from datetime import datetime
@@ -31,14 +32,28 @@ class SendMsgBot(sleekxmpp.ClientXMPP):
         self.disconnect(wait=True)
 
 def send_chat(message, authority):
-    xmpp = SendMsgBot(authority["sender_id"], authority["password"], authority["to"], message)
-    xmpp.register_plugin('xep_0030') # Service Discovery
-    xmpp.register_plugin('xep_0199') # XMPP Ping
+    if authority["chat_type"] == "xmpp":
+        xmpp = SendMsgBot(authority["x_sender_id"], authority["x_password"], authority["x_to"], message)
+        xmpp.register_plugin('xep_0030') # Service Discovery
+        xmpp.register_plugin('xep_0199') # XMPP Ping
+    
+        if xmpp.connect():
+            xmpp.process(block=True)
+        else:
+            print("Unable to connect.")
+    elif authority["chat_type"] == "twitter":
+        api = twitter.Api(consumer_key=authority["t_consumer_key"],
+                          consumer_secret=authority["t_consumer_secret"],
+                          access_token_key=authority["t_access_token_key"],
+                          access_token_secret=authority["t_access_token_secret"])
 
-    if xmpp.connect():
-        xmpp.process(block=True)
-    else:
-        print("Unable to connect.")
+        def send_message(message):
+            if message:
+                api.PostDirectMessage(message[:140], screen_name=authority["t_to"])
+                message = message[140:]
+                send_message(message)
+                
+        send_message(message)
 
 
 def signal_handling(signum, frame):
@@ -58,9 +73,23 @@ def authenticate(reauth):
     else:
         print "Requesting info for initial setup:"
         authority = {}
-        authority["to"] = raw_input("send notifications to (self@gmail.com) ")
-        authority["sender_id"] = raw_input("ID used for sending notifications (id@gmail.com) ")
-        authority["password"] = getpass.getpass("password (for {0}) ".format(authority["sender_id"]))
+        authority["chat_type"] = raw_input("Do you want to get notified over xmpp(like google hangouts) or twitter ?\n[1] xmpp\n[2] twitter\n : ")
+        if authority["chat_type"] == "1":
+            authority["chat_type"] = "xmpp"
+            authority["x_to"] = raw_input("send notifications to (self@gmail.com) ")
+            authority["x_sender_id"] = raw_input("ID used for sending notifications (id@gmail.com) ")
+            authority["x_password"] = getpass.getpass("password (for {0}) ".format(authority["x_sender_id"]))
+        elif authority["chat_type"] == "2":
+            authority["chat_type"] = "twitter"
+            authority["t_to"] = raw_input("send messages to (twitter id) ")
+            authority["t_consumer_key"] =  raw_input("consumer_key: ")
+            authority["t_consumer_secret"] =  raw_input("consumer_secret: ")
+            authority["t_access_token_key"] =  raw_input("access_token_key: ")
+            authority["t_access_token_secret"] =  raw_input("access_token_secret: ")
+        else:
+            print "unknown option"
+            print "exiting"
+            sys.exit()
         pickle.dump(authority, open(temp_file_path,"wb"))
     return authority
 

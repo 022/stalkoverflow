@@ -18,6 +18,7 @@ The best part is since XMPP protocol is being used, users could get notified acr
 * dnspython
 * sleekxmpp
 * beautifulsoup
+* python-twitter
 
 All the above mentioned packages are available in pip.
 
@@ -32,13 +33,13 @@ Make sure you install all requirements
 
 `sudo pip install -r requirements.txt`
 
-The application uses XMPP protocol which supports most of the chat services like jabber and google-hangouts
+The application uses XMPP protocol which supports most of the chat services like jabber and google-hangouts. Alternatively twitter chat can also be used
 
 Run the service using
 
 `python stalkoverflow.py`
 
-Should prompt you for user id's and passwords for authentication. This information is stored until your system is switched off. Later asks you to pick tags to stalk on.
+Should prompt you for user id's and passwords for authentication. This information is stored until your system is switched off. Later asks you to pick tags to stalk on. If you're trying to get notified over twitter you need api keys and tokens.
 
 Looks like this:
 
@@ -54,7 +55,7 @@ Usage: stalkoverflow.py [options]
 
 Options:
   -h, --help  show this help message and exit
-  --auth      Re run authenticative process
+  --auth      Re run authentication process
   --delay     Time delay in seconds
 ```
 

@@ -3,3 +3,4 @@ sleekxmpp
 beautifulsoup
 pyasn1
 pyasn1_modules
+python-twitter
