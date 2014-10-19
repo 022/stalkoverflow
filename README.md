@@ -27,7 +27,7 @@ All the above mentioned packages are available in pip.
 
 Clone this repo
 
-`git clone https://github.com/022/stalkoverflow.git`
+`git clone https://github.com/alella/stalkoverflow.git`
 
 Make sure you install all requirements
 
