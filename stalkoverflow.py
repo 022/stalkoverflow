@@ -62,7 +62,7 @@ def signal_handling(signum, frame):
 def get_option_parser():
     options = OptionParser(description=__doc__)
     options.add_option('--auth', action="store_true", dest='reauth', default=False, help="Re run authenticative process")
-    options.add_option('--delay', action="store_true", dest='delay', default=10, help="Time delay in seconds")
+    options.add_option('--delay', action="store_true", dest='delay', default=20, help="Time delay in seconds")
     return options.parse_args()
                     
 def authenticate(reauth):
@@ -116,6 +116,7 @@ def stalk(tags, authority, delay, h):
         if new_question_id in question_buffer:
             title, link, new_question_id = parseFeed(rss_url, h)
         else:
+            print "[{}]: {}".format(datetime.now(), title)
             question_buffer.append(new_question_id)
             send_chat(title+"""
             """+link, authority)
