@@ -4,7 +4,6 @@ import os
 import sys
 import getpass
 import sleekxmpp
-import signal
 import pickle
 import tempfile
 import getpass
@@ -56,8 +55,6 @@ def send_chat(message, authority):
         send_message(message)
 
 
-def signal_handling(signum, frame):
-    sys.exit()
     
 def get_option_parser():
     options = OptionParser(description=__doc__)
@@ -125,7 +122,6 @@ def stalk(tags, authority, delay, h):
             del question_buffer[0:-20]
         
 def main():
-    signal.signal(signal.SIGINT, signal_handling)
     opts, args =  get_option_parser()
     authority = authenticate(opts.reauth)
     tags = raw_input("Enter tags to stalk on: ")
