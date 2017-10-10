@@ -9,6 +9,7 @@ import tempfile
 import getpass
 import urllib2
 import twitter
+import requests
 
 from optparse import OptionParser
 from datetime import datetime
@@ -53,6 +54,25 @@ def send_chat(message, authority):
                 send_message(message)
                 
         send_message(message)
+    elif authority["chat_type"] == "pushBullet":
+        url = 'https://api.pushbullet.com/v2/pushes'
+        headers = {
+            "Content-Type":"application/json",
+            "Authorization":"Bearer "+authority["token"]
+        }
+        if type(message)==type("str"):
+            json={"type": "note",
+                  "title":"pushbullet",
+                  "body":message}
+        else:
+            body=message["title"]
+            json={"type": "note",
+                  "title":"pushbullet",
+                  "body":body,
+                  "url":message["link"]}            
+        r = requests.post(url,
+                          json=json,
+                          headers=headers)
 
 
     
@@ -70,7 +90,7 @@ def authenticate(reauth):
     else:
         print "Requesting info for initial setup:"
         authority = {}
-        authority["chat_type"] = raw_input("Do you want to get notified over xmpp(like google hangouts) or twitter ?\n[1] xmpp\n[2] twitter\n : ")
+        authority["chat_type"] = raw_input("Do you want to get notified over xmpp(like google hangouts) or twitter ?\n[1] xmpp\n[2] twitter\n[3] pushBullet\n : ")
         if authority["chat_type"] == "1":
             authority["chat_type"] = "xmpp"
             authority["x_to"] = raw_input("send notifications to (self@gmail.com) ")
@@ -83,6 +103,9 @@ def authenticate(reauth):
             authority["t_consumer_secret"] =  raw_input("consumer_secret: ")
             authority["t_access_token_key"] =  raw_input("access_token_key: ")
             authority["t_access_token_secret"] =  raw_input("access_token_secret: ")
+        elif authority["chat_type"] == "3":
+            authority["chat_type"] = "pushBullet"
+            authority["token"] = raw_input("enter access token: ")
         else:
             print "unknown option"
             print "exiting"
@@ -115,7 +138,12 @@ def stalk(tags, authority, delay, h):
         else:
             print "[{}]: {}".format(datetime.now(), title)
             question_buffer.append(new_question_id)
-            send_chat(title+"""
+            if authority["chat_type"]=="pushBullet":
+                msg={"title":title,
+                     "link":link}
+                send_chat(msg,authority)
+            else:
+                send_chat(title+"""
             """+link, authority)
         time.sleep(delay)
         if len(question_buffer) > 120:
