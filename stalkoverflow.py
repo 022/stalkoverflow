@@ -79,7 +79,7 @@ def send_chat(message, authority):
 def get_option_parser():
     options = OptionParser(description=__doc__)
     options.add_option('--auth', action="store_true", dest='reauth', default=False, help="Re run authenticative process")
-    options.add_option('--delay', action="store_true", dest='delay', default=20, help="Time delay in seconds")
+    options.add_option('--delay', action="store", dest='delay', default=20, help="Time delay in seconds")
     return options.parse_args()
                     
 def authenticate(reauth):
@@ -145,7 +145,7 @@ def stalk(tags, authority, delay, h):
             else:
                 send_chat(title+"""
             """+link, authority)
-        time.sleep(delay)
+        time.sleep(int(delay))
         if len(question_buffer) > 120:
             del question_buffer[0:-20]
         
