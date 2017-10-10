@@ -9,7 +9,7 @@ It's such a pain to continuously click on the "n questions with new activity" bu
 
 It's crucial to get info on latest questions posted ASAP in order to get a better StackOverflow rating. Thus, I've decided to write a stalking application which would keep an eye on StackOverflow's activity for my favorite tags.
 
-The best part is since XMPP protocol is being used, users could get notified across all their devices which support chatting!
+this application currently supports messaging through pushbullet, hangouts, twitter.
 
 
 **Requirements:**
@@ -33,21 +33,21 @@ Make sure you install all requirements
 
 `sudo pip install -r requirements.txt`
 
-The application uses XMPP protocol which supports most of the chat services like jabber and google-hangouts. Alternatively twitter chat can also be used
-
 Run the service using
 
 `python stalkoverflow.py`
 
-Should prompt you for user id's and passwords for authentication. This information is stored until your system is switched off. Later asks you to pick tags to stalk on. If you're trying to get notified over twitter you need api keys and tokens.
+That should prompt you for selecting a messaging platform. Choosing pushbullet is recommended. Then, enter your developer api token.
+
+This information is stored until your system is switched off. Later asks you to pick tags to stalk on.
 
 Looks like this:
 
-![](http://s30.postimg.org/60l0swy5t/terminal_scrot.png)
+![](https://s1.postimg.org/7y0f1y2cfz/scrot_M0j_Zs.png)
 
-And if you're using a gmail-id you can get notified on hangouts!
+<p>&nbsp;</p>And if you're using a gmail-id you can get notified on hangouts!
 
-![](http://s4.postimg.org/i0nghcn3x/chat_preview.png)
+<center><img src="https://s1.postimg.org/1wehacfmcf/scrot5f_Wok.png" width="400"></center><p>&nbsp;</p><p>&nbsp;</p>
 
 Extra argument specifications:
 ```
